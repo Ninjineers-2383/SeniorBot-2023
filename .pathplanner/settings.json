@@ -2,6 +2,6 @@
   "robotWidth": 0.787,
   "robotLength": 0.787,
   "holonomicMode": true,
-  "generateJSON": true,
-  "generateCSV": false
+  "pathFolders": [],
+  "autoFolders": []
 }
