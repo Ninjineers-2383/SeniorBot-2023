@@ -7,12 +7,6 @@ package com.team2383.robot;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 import com.team2383.robot.Constants.Mode;
-import com.team2383.robot.autos.ConeCubeAuto;
-import com.team2383.robot.autos.CubeMobilityAuto;
-import com.team2383.robot.autos.EngageAuto;
-import com.team2383.robot.autos.auto_blocks.Engage;
-import com.team2383.robot.autos.auto_blocks.ScoreHighCommand;
-import com.team2383.robot.autos.auto_blocks.ScoreMiddleCommand;
 import com.team2383.robot.commands.ElevatorVelocityCommand;
 import com.team2383.robot.commands.FeederVoltageCommand;
 import com.team2383.robot.commands.JoystickDriveHeadingLock;
@@ -137,6 +131,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
         configureDefaultCommands();
+        registerNamedCommands();
         setAutoCommands();
 
         enableLW.addDefaultOption("No", false);
@@ -228,6 +223,10 @@ public class RobotContainer {
                         () -> -MathUtil.applyDeadband(m_operatorController.getRawAxis(5), 0.04)));
     }
 
+    private void registerNamedCommands() {
+
+    }
+
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
@@ -241,46 +240,5 @@ public class RobotContainer {
         Command nullAuto = null;
 
         autoChooser.addDefaultOption("No Auto :(", nullAuto);
-
-        autoChooser.addOption("Score Cube Middle",
-                new ScoreMiddleCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, true));
-
-        autoChooser.addOption("Score Cube High",
-                new ScoreHighCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, true));
-
-        autoChooser.addOption("Score Cone Middle",
-                new ScoreMiddleCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, false));
-
-        autoChooser.addOption("Score Cone High",
-                new ScoreHighCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, false));
-
-        autoChooser.addOption("Cube Mobility Dirty Cone",
-                new CubeMobilityAuto(m_drivetrainSubsystem, m_elevatorSubsystem,
-                        m_wristSubsystem, m_feederSubsystem, "CubeDirtyCone"));
-
-        autoChooser.addOption("Cube Mobility Clean Cone",
-                new CubeMobilityAuto(m_drivetrainSubsystem, m_elevatorSubsystem,
-                        m_wristSubsystem, m_feederSubsystem, "CubeCleanCone"));
-
-        autoChooser.addOption("Cube Engage", new EngageAuto(m_drivetrainSubsystem, m_elevatorSubsystem,
-                m_wristSubsystem, m_feederSubsystem, "CubeEngage", true));
-
-        autoChooser.addOption("Cone Cube Clean Score", new ConeCubeAuto(m_drivetrainSubsystem, m_elevatorSubsystem,
-                m_wristSubsystem, m_feederSubsystem, "ConeCleanCubeScore"));
-
-        autoChooser.addOption("Cone Cube Dirty Score", new ConeCubeAuto(m_drivetrainSubsystem, m_elevatorSubsystem,
-                m_wristSubsystem, m_feederSubsystem, "ConeDirtyCubeScore"));
-
-        autoChooser.addOption("Cube Clean Cube Engage", new EngageAuto(m_drivetrainSubsystem,
-                m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, "CubeCleanCubeEngage", true));
-
-        autoChooser.addOption("Cube Charge Cube Engage", new EngageAuto(m_drivetrainSubsystem,
-                m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, "CubeChargeCubeEngage", true));
-
-        autoChooser.addOption("Cube Charge Cone Score Engage", new EngageAuto(m_drivetrainSubsystem,
-                m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, "CubeChargeConeScoreEngage", true));
-
-        autoChooser.addOption("Engage", new Engage(m_drivetrainSubsystem, true));
-
     }
 }

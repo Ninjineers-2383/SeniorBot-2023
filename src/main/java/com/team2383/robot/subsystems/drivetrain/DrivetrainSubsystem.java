@@ -24,6 +24,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.team2383.robot.subsystems.drivetrain.vision.VisionIOInputsAutoLogged;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 import com.team2383.robot.subsystems.drivetrain.vision.VisionConstants;
 import com.team2383.robot.subsystems.drivetrain.vision.VisionIO;
 
@@ -56,6 +60,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private int loop_cycle = 0;
 
     private double headingIntegral = 0;
+
+    private ChassisSpeeds m_robotRelativeSpeeds = new ChassisSpeeds();
 
     public DrivetrainSubsystem(GyroIO gyro, VisionIO vision, SwerveModuleIO frontLeftIO, SwerveModuleIO frontRightIO,
             SwerveModuleIO rearLeftIO, SwerveModuleIO rearRightIO) {
@@ -93,9 +99,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         resetHeading();
 
-        // headingIntegral =
-        // m_poseEstimator.getEstimatedPosition().getRotation().getRadians();
-
+        AutoBuilder.configureHolonomic(
+                this::getPose, // Robot pose supplier
+                this::forceOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+                this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+                this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your
+                                                 // Constants class
+                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        4.5, // Max module speed, in m/s
+                        0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                        new ReplanningConfig() // Default path replanning config. See the API for the options here
+                ),
+                this // Reference to this subsystem to set requirements
+        );
     }
 
     @Override
@@ -213,6 +231,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
         Logger.getInstance().recordOutput("Swerve/Desired Module States", swerveModuleStates);
 
         m_COR.setPose(getPose().plus(new Transform2d(centerOfRotation, new Rotation2d())));
+    }
+
+    public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
+        m_robotRelativeSpeeds = robotRelativeSpeeds;
+        SwerveModuleState[] swerveModuleStates = m_kinematics.toSwerveModuleStates(
+                robotRelativeSpeeds);
+
+        setModuleStates(swerveModuleStates);
+    }
+
+    public ChassisSpeeds getRobotRelativeSpeeds() {
+        return m_robotRelativeSpeeds;
     }
 
     public void setModuleStates(SwerveModuleState[] states) {
