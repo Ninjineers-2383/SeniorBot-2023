@@ -13,7 +13,7 @@ public class GyroIONavX implements GyroIO {
 
     @Override
     public void updateInputs(GyroIOInputs inputs) {
-        inputs.connected = true; // TODO: Figure out how to get connected status
+        inputs.connected = m_gyro.isConnected();
         inputs.headingDeg = -m_gyro.getAngle();
         inputs.rollDeg = m_gyro.getRoll();
         inputs.headingRateDPS = m_gyro.getRate();

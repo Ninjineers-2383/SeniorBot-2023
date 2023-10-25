@@ -7,11 +7,11 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class Engage extends CommandBase {
+public class EngageCommand extends CommandBase {
     private final DrivetrainSubsystem m_drivetrain;
     private final PIDController m_pid = new PIDController(0.03, 0, 0);
 
-    public Engage(DrivetrainSubsystem drivetrain, boolean invert) {
+    public EngageCommand(DrivetrainSubsystem drivetrain, boolean invert) {
         this.m_drivetrain = drivetrain;
 
         this.m_pid.setTolerance(0.1);

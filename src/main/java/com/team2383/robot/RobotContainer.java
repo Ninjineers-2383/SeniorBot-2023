@@ -6,7 +6,14 @@ package com.team2383.robot;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.team2383.robot.Constants.Mode;
+import com.team2383.robot.autos.auto_blocks.EngageCommand;
+import com.team2383.robot.autos.auto_blocks.FeedConeCommand;
+import com.team2383.robot.autos.auto_blocks.FeedCubeCommand;
+import com.team2383.robot.autos.auto_blocks.ScoreHighCommand;
+import com.team2383.robot.autos.auto_blocks.ScoreMiddleCommand;
 import com.team2383.robot.commands.ElevatorVelocityCommand;
 import com.team2383.robot.commands.FeederVoltageCommand;
 import com.team2383.robot.commands.JoystickDriveHeadingLock;
@@ -224,7 +231,25 @@ public class RobotContainer {
     }
 
     private void registerNamedCommands() {
+        NamedCommands.registerCommand("Score Cube High",
+                new ScoreHighCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, true));
 
+        NamedCommands.registerCommand("Score Cube Middle",
+                new ScoreMiddleCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, true));
+
+        NamedCommands.registerCommand("Score Cone High",
+                new ScoreHighCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, false));
+
+        NamedCommands.registerCommand("Score Cone Middle",
+                new ScoreMiddleCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem, false));
+
+        NamedCommands.registerCommand("Feed Cone",
+                new FeedConeCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem));
+
+        NamedCommands.registerCommand("Feed Cube",
+                new FeedCubeCommand(m_elevatorSubsystem, m_wristSubsystem, m_feederSubsystem));
+
+        NamedCommands.registerCommand("Engage", new EngageCommand(m_drivetrainSubsystem, true));
     }
 
     /**
@@ -240,5 +265,8 @@ public class RobotContainer {
         Command nullAuto = null;
 
         autoChooser.addDefaultOption("No Auto :(", nullAuto);
+
+        autoChooser.addOption("Engage Auto", new PathPlannerAuto("CubeEngageAuto"));
+
     }
 }
