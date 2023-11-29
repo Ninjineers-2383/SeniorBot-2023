@@ -159,23 +159,29 @@ public class RobotContainer {
     private void configureButtonBindings() {
         // Ground Intake
         new JoystickButton(m_operatorController, 1)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.GROUND_INTAKE));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.GROUND_INTAKE)
+                        .withTimeout(1));
 
         // Cone Chute
         new JoystickButton(m_operatorController, 2)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.CONE_CHUTE));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.CONE_CHUTE)
+                        .withTimeout(1));
         // Middle
         new JoystickButton(m_operatorController, 3)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.MIDDLE));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.MIDDLE)
+                        .withTimeout(1));
         // High
         new JoystickButton(m_operatorController, 4)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.HIGH));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.HIGH)
+                        .withTimeout(1));
 
         new POVButton(m_operatorController, 0)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.SLIDER));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.SLIDER)
+                        .withTimeout(1));
 
         new POVButton(m_operatorController, 90)
-                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.HIGH_2));
+                .onTrue(new BlizzardCommand(m_elevatorSubsystem, m_wristSubsystem, BlizzardPresets.HIGH_2)
+                        .withTimeout(1));
 
         new JoystickButton(m_driverController, 1)
                 .toggleOnTrue(new JoystickDriveHeadingLock(m_drivetrainSubsystem,
