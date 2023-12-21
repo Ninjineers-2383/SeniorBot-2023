@@ -38,4 +38,7 @@ public class BlizzardPresets {
                 return null;
         }
     }
+
+    public static record BlizzardPosition(double extensionLength, Rotation2d wristAngle) {
+    }
 }
