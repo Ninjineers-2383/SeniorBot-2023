@@ -64,6 +64,11 @@ public class SwerveModuleIOFalcon500 implements SwerveModuleIO {
     }
 
     @Override
+    public void resetToZero() {
+        m_angleMotor.setRotorPosition(0);
+    }
+
+    @Override
     public void setDesiredState(SwerveModuleState desiredState) {
         setSpeed(desiredState);
         setAngle(desiredState);

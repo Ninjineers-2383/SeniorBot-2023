@@ -47,6 +47,10 @@ public class CoaxialSwerveModule implements Sendable {
         m_io.resetToAbsolute();
     }
 
+    public void resetToZero() {
+        m_io.resetToZero();
+    }
+
     public SwerveModuleState getState() {
         return new SwerveModuleState(
                 m_inputs.velocityMPS,

@@ -18,6 +18,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -103,6 +104,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         if (loop_cycle == 200) {
             for (CoaxialSwerveModule module : m_modules) {
                 module.resetToAbsolute();
+            }
+        }
+
+        if (RobotController.getUserButton()) {
+            for (CoaxialSwerveModule module : m_modules) {
+                module.resetToZero();
             }
         }
 
