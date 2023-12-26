@@ -76,7 +76,8 @@ public class RobotContainer {
                             new SwerveModuleIOFalcon500(DriveConstants.rearRightConstants,
                                     Constants.kCANivoreBus));
                     m_visionSubsystem = new VisionSubsystem(
-                            new VisionIONorthstar("northstar-1"), new VisionIONorthstar("northstar-2"));
+                            new VisionIONorthstar("northstar-1"), new VisionIONorthstar("northstar-2"),
+                            new VisionIONorthstar("northstar-3"));
                     m_visionSubsystem.setPoseSupplier(m_drivetrainSubsystem::getPose3d);
 
                     break;

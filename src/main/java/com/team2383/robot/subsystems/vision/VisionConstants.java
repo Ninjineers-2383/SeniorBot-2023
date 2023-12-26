@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 public final class VisionConstants {
 
     // Description of the camera's relative position
-    private static final Rotation3d CAM_ROTATION_FL = new Rotation3d(0, Math.toRadians(-10), Math.toRadians(-10));
+    private static final Rotation3d CAM_ROTATION_FL = new Rotation3d(0, Math.toRadians(-10), Math.toRadians(-20));
     private static final Rotation3d CAM_ROTATION_FR = new Rotation3d(0, Math.toRadians(-10), Math.toRadians(-110));
     private static final Rotation3d CAM_ROTATION_BL = new Rotation3d(0, Math.toRadians(-10), Math.toRadians(-290));
     private static final Rotation3d CAM_ROTATION_BR = new Rotation3d(0, Math.toRadians(-10), Math.toRadians(-200));
