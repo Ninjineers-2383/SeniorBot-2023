@@ -56,42 +56,7 @@
       "/SmartDashboard/TeleOp Scoring": "String Chooser"
     },
     "windows": {
-      "/SmartDashboard/Auto": {
-        "window": {
-          "visible": true
-        }
-      },
       "/SmartDashboard/Field": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 1": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 10": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 11": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 2": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 3": {
-        "window": {
-          "visible": true
-        }
-      },
-      "/SmartDashboard/Question 4": {
         "window": {
           "visible": true
         }
